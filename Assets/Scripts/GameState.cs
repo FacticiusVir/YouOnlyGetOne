@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using UnityEngine;
+
 namespace Assets.Scripts
 {
     public class GameState
+        : MonoBehaviour
     {
         private static GameState instance;
-
-        private GameState()
-        {
-            CurrentMode = GameMode.ThirdPersonShooter;
-        }
 
         public static GameState Instance
         {
@@ -20,17 +18,36 @@ namespace Assets.Scripts
             {
                 if (instance == null)
                 {
-                    instance = new GameState();
+                    var controllerObject = GameObject.FindGameObjectWithTag("GameController");
+
+                    if (controllerObject != null)
+                    {
+                        instance = controllerObject.GetComponent<GameState>();
+                    }
+
+                    if (instance == null)
+                    {
+                        var newControllerObject = new GameObject("GameState", typeof(GameState));
+                        newControllerObject.tag = "GameController";
+
+                        instance = newControllerObject.GetComponent<GameState>();
+                    }
                 }
 
                 return instance;
             }
         }
 
-        public GameMode CurrentMode
+        private void Start()
         {
-            get;
-            set;
+            if (instance != this)
+            {
+                instance = this;
+            }
         }
+
+        public GameMode CurrentMode;
+
+        public bool CanChangeGameMode = true;
     }
 }

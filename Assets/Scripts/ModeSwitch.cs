@@ -12,7 +12,7 @@ namespace Assets.Scripts
     {
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Tab))
+            if (GameState.Instance.CanChangeGameMode && Input.GetKeyDown(KeyCode.Tab))
             {
                 GameState.Instance.CurrentMode++;
                 if (GameState.Instance.CurrentMode > GameMode.Puzzler)
@@ -20,6 +20,9 @@ namespace Assets.Scripts
                     GameState.Instance.CurrentMode = GameMode.ThirdPersonShooter;
                 }
             }
+
+            Screen.lockCursor = true;
+            Screen.showCursor = GameState.Instance.CurrentMode == GameMode.Puzzler;
         }
     }
 }
