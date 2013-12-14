@@ -18,14 +18,18 @@ namespace Assets.Scripts
             switch (GameState.Instance.CurrentMode)
             {
                 case GameMode.ThirdPersonShooter:
-                    Parent.transform.Translate(new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * Speed, 0, Input.GetAxis("Vertical") * Time.deltaTime * Speed), this.transform);
+                    var deltaPosition = new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * Speed, 0, Input.GetAxis("Vertical") * Time.deltaTime * Speed);
+
+                    deltaPosition = this.transform.TransformDirection(deltaPosition);
+
+                    Parent.rigidbody.MovePosition(Parent.rigidbody.position + deltaPosition);
                     break;
                 case GameMode.Sidescroller:
-                    Parent.transform.Translate(new Vector3(0, 0, Input.GetAxis("Horizontal") * Time.deltaTime * Speed), Space.World);
+                    Parent.rigidbody.MovePosition(Parent.rigidbody.position + new Vector3(0, 0, Input.GetAxis("Horizontal") * Time.deltaTime * Speed));
 
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
-                        Parent.transform.Translate(0, 2, 0);
+                        Parent.rigidbody.velocity += new Vector3(0, 5, 0);
                     }
                     break;
                 case GameMode.Puzzler:
