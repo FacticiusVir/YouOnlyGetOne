@@ -15,7 +15,7 @@ namespace Assets.Scripts
             if (Input.GetKeyDown(KeyCode.BackQuote))
             {
                 GameState.Instance.CurrentMode++;
-                if (GameState.Instance.CurrentMode > GameMode.Sidescroller)
+                if (GameState.Instance.CurrentMode > GameMode.Puzzler)
                 {
                     GameState.Instance.CurrentMode = GameMode.ThirdPersonShooter;
                 }
