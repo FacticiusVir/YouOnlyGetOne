@@ -12,7 +12,7 @@ namespace Assets.Scripts
     {
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.BackQuote))
+            if (Input.GetKeyDown(KeyCode.Tab))
             {
                 GameState.Instance.CurrentMode++;
                 if (GameState.Instance.CurrentMode > GameMode.Puzzler)
