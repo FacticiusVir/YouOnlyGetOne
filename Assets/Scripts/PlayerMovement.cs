@@ -27,7 +27,7 @@ namespace Assets.Scripts
                 case GameMode.Sidescroller:
                     Parent.rigidbody.MovePosition(Parent.rigidbody.position + new Vector3(0, 0, Input.GetAxis("Horizontal") * Time.deltaTime * Speed));
 
-                    if (Input.GetKeyDown(KeyCode.Space))
+                    if (Input.GetButtonDown("Jump"))
                     {
                         Parent.rigidbody.velocity += new Vector3(0, 5, 0);
                     }
